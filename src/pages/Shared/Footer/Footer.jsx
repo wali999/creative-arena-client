@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="footer footer-horizontal footer-center bg-base-100 text-[#2D3436] p-10">
             <aside>
                 <img src={logoImg} className="inline-block fill-current w-[50px] h-[50px]" alt="" />
-                <p className="font-bold">
+                <p className="font-bold text-secondary text-xl">
                     Creative Arena
                 </p>
                 <p>Copyright © {new Date().getFullYear()} - All right reserved</p>

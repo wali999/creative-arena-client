@@ -1,9 +1,20 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import logoImg from '../../../assets/Creative-Arena-logo.png'
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
 
+    const { user, logOut } = useAuth();
+
+    const handleLogout = () => {
+        logOut()
+            .then()
+            .catch(error => {
+                console.log(error);
+
+            })
+    }
 
     const links = <>
         <li><NavLink to=''>Home</NavLink></li>
@@ -39,7 +50,37 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link className='btn' to='/login' >Log In</Link>
+                {user ? (
+                    <>
+                        <Link
+                            to='/dashboard'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                        >
+                            Dashboard
+                        </Link>
+                        <div
+                            onClick={handleLogout}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                        >
+                            Logout
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <Link
+                            to='/login'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                        >
+                            Login
+                        </Link>
+                        <Link
+                            to='/register'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                        >
+                            Register
+                        </Link>
+                    </>
+                )}
 
             </div>
         </div>
