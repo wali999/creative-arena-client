@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import logoImg from '../../../assets/Creative-Arena-logo.png'
+import avatarImg from '../../../assets/avatar.jpg'
 import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleLogout = () => {
         logOut()
@@ -18,7 +20,7 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to=''>Home</NavLink></li>
-        <li><NavLink to='/all-contest'>All Contests</NavLink></li>
+        <li><NavLink to='/all-contests'>All Contests</NavLink></li>
         <li><NavLink to='/extra'>Xtra</NavLink></li>
         <li><NavLink to=''>About Us</NavLink></li>
     </>
@@ -49,37 +51,66 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end">
-                {user ? (
-                    <>
-                        <Link
-                            to='/dashboard'
-                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                            Dashboard
-                        </Link>
-                        <div
-                            onClick={handleLogout}
-                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
-                        >
-                            Logout
+            <div className="navbar-end relative">
+                <div className='flex flex-row items-center gap-3'>
+                    {/* Dropdown btn */}
+                    <div
+                        onClick={() => setIsOpen(!isOpen)}
+                        className='p-4 md:py-1 md:px-2  flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
+                    >
+
+                        <div className='hidden md:block'>
+                            {/* Avatar */}
+                            <img
+                                className='rounded-full'
+                                referrerPolicy='no-referrer'
+                                src={user && user.photoURL ? user.photoURL : avatarImg}
+                                alt='profile'
+                                height='40'
+                                width='40'
+                            />
                         </div>
-                    </>
-                ) : (
-                    <>
-                        <Link
-                            to='/login'
-                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                            Login
-                        </Link>
-                        <Link
-                            to='/register'
-                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                            Register
-                        </Link>
-                    </>
+                    </div>
+                </div>
+                {isOpen && (
+                    <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[7vw] bg-white overflow-hidden right-0 top-12 text-sm'>
+                        <div className='flex flex-col cursor-pointer'>
+                            {user ? (
+                                <>
+                                    <div className='px-4 py-2 text-center  font-bold'>
+                                        {user.displayName}
+                                    </div>
+                                    <Link
+                                        to='/dashboard'
+                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <div
+                                        onClick={handleLogout}
+                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                    >
+                                        Logout
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <Link
+                                        to='/login'
+                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to='/register'
+                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Register
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 )}
 
             </div>

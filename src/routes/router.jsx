@@ -4,6 +4,12 @@ import Home from "../pages/Home/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import AllContests from "../pages/Contests/AllContests";
+import ContestDetails from "../pages/Contests/ContestDetails";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
+import AddContest from "../pages/Dashboard/Creator/AddContest";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +19,14 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: 'all-contests',
+                Component: AllContests
+            },
+            {
+                path: 'all-contests/:id',
+                Component: ContestDetails
             }
         ]
     },
@@ -28,6 +42,22 @@ export const router = createBrowserRouter([
                 path: 'register',
                 Component: Register
             }
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+        </PrivateRoute>,
+        children: [
+            {
+                index: true,
+                Component: DashboardHome
+            },
+            {
+                path: 'add-contest',
+                Component: AddContest
+            },
         ]
     }
 ]);
