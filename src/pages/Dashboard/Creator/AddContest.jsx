@@ -2,20 +2,46 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
 
 const AddContest = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [deadline, setDeadline] = useState(new Date());
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
+    const handleAddContest = (data) => {
+        const formattedDeadline = deadline.toISOString();
         const contestData = {
             ...data,
-            deadline,
+            deadline: formattedDeadline,
             price: parseFloat(data.price),
             prizeMoney: parseFloat(data.prizeMoney),
+            createdBy: user?.email,
         };
 
         console.log("New Contest:", contestData);
+
+        //save the parcel to the database
+        axiosSecure.post('/contests', contestData)
+            .then(res => {
+                console.log('Aftyer creating contest', res.data);
+                if (res.data.insertedId) {
+                    navigate('/dashboard/my-created-contests')
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Contest created.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+
+            })
 
         // Reset form
         reset();
@@ -26,7 +52,7 @@ const AddContest = () => {
         <div className="max-w-3xl mx-auto p-6 mt-5 bg-base-100 shadow-xl rounded-xl">
             <h2 className="text-2xl font-bold mb-6 text-center">Add New Contest</h2>
 
-            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-5" onSubmit={handleSubmit(handleAddContest)}>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
 
                     <div className="space-y-5">
