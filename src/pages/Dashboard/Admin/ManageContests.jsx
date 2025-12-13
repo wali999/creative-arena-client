@@ -58,7 +58,7 @@ const ManageContests = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-bold mb-6">My Created Contests</h2>
+            <h2 className="text-2xl font-bold mb-6">Manage Contests</h2>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
@@ -82,7 +82,16 @@ const ManageContests = () => {
                                 <td>{contest.contestType}</td>
                                 <td>${contest.prizeMoney}</td>
                                 <td>
-                                    <span className="badge badge-info">{contest.status}</span>
+                                    <span
+                                        className={`badge ${contest.status === 'approved'
+                                                ? 'badge-success'
+                                                : contest.status === 'rejected'
+                                                    ? 'badge-error'
+                                                    : 'badge-info'
+                                            }`}
+                                    >
+                                        {contest.status}
+                                    </span>
                                 </td>
                                 <td>
                                     {new Date(contest.deadline).toLocaleDateString("en-US")}

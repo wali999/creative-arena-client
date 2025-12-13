@@ -63,14 +63,23 @@ const MyCreatedContests = () => {
                                 <td>{contest.contestType}</td>
                                 <td>${contest.prizeMoney}</td>
                                 <td>
-                                    <span className="badge badge-info">{contest.status}</span>
+                                    <span
+                                        className={`badge ${contest.status === 'approved'
+                                            ? 'badge-success'
+                                            : contest.status === 'rejected'
+                                                ? 'badge-error'
+                                                : 'badge-info'
+                                            }`}
+                                    >
+                                        {contest.status}
+                                    </span>
                                 </td>
                                 <td>
                                     {new Date(contest.deadline).toLocaleDateString("en-US")}
                                 </td>
 
                                 <td className="flex gap-3 justify-center">
-                                    {contest.status === "pending" ? (
+                                    {contest.status === 'pending' && (
                                         <>
                                             <Link
                                                 to={`/dashboard/edit-contest/${contest._id}`}
@@ -86,13 +95,21 @@ const MyCreatedContests = () => {
                                                 Delete
                                             </button>
                                         </>
-                                    ) : (
+                                    )}
+
+                                    {contest.status === 'approved' && (
                                         <Link
                                             to={`/dashboard/submissions/${contest._id}`}
                                             className="btn btn-sm btn-info"
                                         >
                                             See Submissions
                                         </Link>
+                                    )}
+
+                                    {contest.status === 'rejected' && (
+                                        <span title="This contest was rejected by admin" className="text-gray-400 text-sm">
+                                            No Actions
+                                        </span>
                                     )}
                                 </td>
                             </tr>
