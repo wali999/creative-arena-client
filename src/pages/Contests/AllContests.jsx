@@ -4,7 +4,7 @@ import Contests from '../../components/Home/Contests';
 const AllContests = () => {
     return (
         <div>
-            <h2 className='text-3xl text-center font-semibold mt-5'>All Contest</h2>
+            <h2 className='text-3xl text-center font-semibold my-5'>All Contests</h2>
             <Contests></Contests>
         </div>
     );

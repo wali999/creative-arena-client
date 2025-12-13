@@ -1,14 +1,27 @@
 import React from 'react';
-import { FaAward, FaMoneyBillWave, FaRegClock, FaTags } from 'react-icons/fa';
+import { FaAward, FaMoneyBillWave, FaRegClock, FaTags, FaUserFriends } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router';
+import useAuth from '../../hooks/useAuth';
 
-const Card = () => {
+const Card = ({ contest }) => {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    const handleDetailsClick = () => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            navigate(`/all-contests/${contest._id}`);
+        }
+    };
+
     return (
         <div className="card w-[350px] bg-base-100 shadow-xl rounded-xl hover:shadow-2xl transition">
             {/* Image */}
             <figure className="h-56 overflow-hidden rounded-t-xl">
                 <img
-                    src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80"
-                    alt="Creative Contest"
+                    src={contest.image}
+                    alt={contest.name}
                     className="w-full h-full object-cover hover:scale-105 transition"
                 />
             </figure>
@@ -17,50 +30,43 @@ const Card = () => {
             <div className="card-body p-5">
                 {/* Title */}
                 <h2 className="card-title text-xl font-semibold">
-                    Logo Design Challenge
+                    {contest.name}
                 </h2>
 
                 {/* Short Description */}
                 <p className="text-sm text-gray-600 mb-2">
-                    Create a modern, clean, and professional logo for a fictional tech brand...
+                    {contest.description.slice(0, 90)}...
                 </p>
 
                 {/* Info Section */}
                 <div className="space-y-2 text-sm">
                     <p className="flex gap-2 items-center">
-                        <FaMoneyBillWave className="text-green-500" />
-                        <span className="font-semibold">Entry Fee:</span> $15
-                    </p>
-
-                    <p className="flex gap-2 items-center">
-                        <FaAward className="text-yellow-500" />
-                        <span className="font-semibold">Prize Money:</span> $200
-                    </p>
-
-                    <p className="flex gap-2 items-center">
                         <FaTags className="text-blue-500" />
-                        <span className="font-semibold">Contest Type:</span> Image Design
+                        <span className="font-semibold">Contest Type:</span> {contest.contestType}
                     </p>
 
                     <p className="flex gap-2 items-center">
                         <FaRegClock className="text-red-500" />
-                        <span className="font-semibold">Deadline:</span> Jan 31, 2025
+                        <span className="font-semibold">Deadline:</span> {' '}
+                        {new Date(contest.deadline).toLocaleDateString()}
+                    </p>
+                    <p className="flex gap-2 items-center">
+                        <FaUserFriends className="text-yellow-500" />
+                        <span className="font-semibold">Perticipants:</span> {' '}
+                        {contest.participants || 0}
                     </p>
                 </div>
 
-                {/* Task Instruction */}
-                <div className="mt-3">
-                    <h3 className="font-semibold">Task Instruction:</h3>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                        Submit high-quality PNG or SVG files. Use your creativity
-                        to produce a unique logomark.
-                    </p>
-                </div>
+
 
                 {/* Buttons */}
                 <div className="card-actions mt-4 justify-end">
-                    <button className="btn btn-primary btn-sm">Details</button>
-                    <button className="btn btn-accent btn-sm">Register</button>
+                    <button
+                        onClick={handleDetailsClick}
+                        className="btn btn-primary btn-sm"
+                    >
+                        View Details
+                    </button>
                 </div>
             </div>
         </div>
