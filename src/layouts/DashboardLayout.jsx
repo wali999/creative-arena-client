@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import logoImg from '../assets/Creative-Arena-logo.png'
 import { MdAddToPhotos, MdBookmarkAdded } from 'react-icons/md';
+import { FaUserEdit } from 'react-icons/fa';
 
 const DashboardLayout = () => {
     return (
@@ -42,6 +43,7 @@ const DashboardLayout = () => {
                         </li>
 
                         {/* our dashboard links */}
+                        {/* Creator */}
                         <li>
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Contest" to='/dashboard/add-contest'>
                                 <MdAddToPhotos />
@@ -49,11 +51,19 @@ const DashboardLayout = () => {
                             </NavLink>
                         </li>
 
-                        {/* our dashboard links */}
                         <li>
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Created Contest" to='/dashboard/my-created-contests'>
                                 <MdBookmarkAdded />
                                 <span className="is-drawer-close:hidden">My Created Contest</span>
+                            </NavLink>
+                        </li>
+
+
+                        {/* Admin Dashboard panel */}
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users" to='/dashboard/manage-users'>
+                                <FaUserEdit />
+                                <span className="is-drawer-close:hidden">Manage Users</span>
                             </NavLink>
                         </li>
 

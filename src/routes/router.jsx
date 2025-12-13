@@ -12,6 +12,7 @@ import AddContest from "../pages/Dashboard/Creator/AddContest";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyCreatedContests from "../pages/Dashboard/Creator/MyCreatedContests";
 import EditContest from "../pages/Dashboard/Creator/EditContest";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path: 'edit-contest/:id',
                 Component: EditContest
+            },
+            {
+                path: 'manage-users',
+                Component: ManageUsers
             }
         ]
     }
