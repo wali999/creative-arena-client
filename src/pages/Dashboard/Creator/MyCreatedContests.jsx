@@ -70,19 +70,30 @@ const MyCreatedContests = () => {
                                 </td>
 
                                 <td className="flex gap-3 justify-center">
-                                    <Link
-                                        to={`/dashboard/edit-contest/${contest._id}`}
-                                        className="btn btn-sm btn-primary"
-                                    >
-                                        Edit
-                                    </Link>
+                                    {contest.status === "pending" ? (
+                                        <>
+                                            <Link
+                                                to={`/dashboard/edit-contest/${contest._id}`}
+                                                className="btn btn-sm btn-primary"
+                                            >
+                                                Edit
+                                            </Link>
 
-                                    <button
-                                        onClick={() => handleDelete(contest._id)}
-                                        className="btn btn-sm btn-error"
-                                    >
-                                        Delete
-                                    </button>
+                                            <button
+                                                onClick={() => handleDelete(contest._id)}
+                                                className="btn btn-sm btn-error"
+                                            >
+                                                Delete
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <Link
+                                            to={`/dashboard/submissions/${contest._id}`}
+                                            className="btn btn-sm btn-info"
+                                        >
+                                            See Submissions
+                                        </Link>
+                                    )}
                                 </td>
                             </tr>
                         ))}
