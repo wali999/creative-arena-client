@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import logoImg from '../assets/Creative-Arena-logo.png'
-import { MdAddToPhotos } from 'react-icons/md';
+import { MdAddToPhotos, MdBookmarkAdded } from 'react-icons/md';
 
 const DashboardLayout = () => {
     return (
@@ -46,6 +46,14 @@ const DashboardLayout = () => {
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Contest" to='/dashboard/add-contest'>
                                 <MdAddToPhotos />
                                 <span className="is-drawer-close:hidden">Add Contest</span>
+                            </NavLink>
+                        </li>
+
+                        {/* our dashboard links */}
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Created Contest" to='/dashboard/my-created-contests'>
+                                <MdBookmarkAdded />
+                                <span className="is-drawer-close:hidden">My Created Contest</span>
                             </NavLink>
                         </li>
 

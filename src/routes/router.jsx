@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
                 Component: MyCreatedContests
             },
             {
-                path: 'edit-contest',
+                path: 'edit-contest/:id',
                 Component: EditContest
             }
         ]
