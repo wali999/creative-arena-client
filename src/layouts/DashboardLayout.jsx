@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import logoImg from '../assets/Creative-Arena-logo.png'
 import { MdAddToPhotos, MdAppRegistration, MdBookmarkAdded, MdLibraryAddCheck } from 'react-icons/md';
 import { FaUserEdit } from 'react-icons/fa';
+import { BsFillSendCheckFill } from 'react-icons/bs';
 
 const DashboardLayout = () => {
     return (
@@ -63,6 +64,12 @@ const DashboardLayout = () => {
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Created Contest" to='/dashboard/my-created-contests'>
                                 <MdBookmarkAdded />
                                 <span className="is-drawer-close:hidden">My Created Contest</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Submitted Task" to='/dashboard/submitted-task'>
+                                <BsFillSendCheckFill />
+                                <span className="is-drawer-close:hidden">Submitted Task</span>
                             </NavLink>
                         </li>
 

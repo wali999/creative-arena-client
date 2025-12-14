@@ -16,6 +16,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ManageContests from "../pages/Dashboard/Admin/ManageContests";
 import MyParticipated from "../pages/Dashboard/User/MyParticipated";
 import PaymentSuccess from "../pages/Contests/payment-success";
+import SubmittedTasks from "../pages/Dashboard/Creator/SubmittedTasks";
 
 export const router = createBrowserRouter([
     {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
             {
                 path: 'edit-contest/:id',
                 Component: EditContest
+            },
+            {
+                path: 'submitted-task',
+                Component: SubmittedTasks
             },
 
             // Admin only route

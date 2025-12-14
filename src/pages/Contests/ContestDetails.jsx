@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { GiTrophyCup } from 'react-icons/gi';
 
 const ContestDetails = () => {
     const { id } = useParams();
@@ -26,6 +27,14 @@ const ContestDetails = () => {
         },
     });
 
+    const { data: submissions = [] } = useQuery({
+        queryKey: ['submissions', id],
+        enabled: !!id,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/submissions?contestId=${id}`);
+            return res.data;
+        }
+    });
 
     useEffect(() => {
         if (!contest?.deadline) return;
@@ -62,6 +71,7 @@ const ContestDetails = () => {
 
 
     const isRegistered = contest?.participants?.includes(user?.email);
+    const winner = submissions.find(s => s.isWinner);
 
 
     const handlePay = async () => {
@@ -102,6 +112,10 @@ const ContestDetails = () => {
         });
     };
 
+
+    const hasSubmitted = submissions.some(
+        s => s.participant.email === user?.email
+    );
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -183,20 +197,21 @@ const ContestDetails = () => {
                 </div>
 
                 {/* Winner Section */}
-                <div className="mb-8 border rounded-xl p-6 bg-base-200">
-                    <h2 className="text-2xl font-semibold mb-4">Winner</h2>
-                    <div className="flex items-center gap-4">
-                        <img
-                            src="https://i.pravatar.cc/100?img=12"
-                            alt="Winner"
-                            className="w-16 h-16 rounded-full"
-                        />
-                        <div>
-                            <p className="font-semibold text-lg">Alex Johnson</p>
-                            <p className="text-sm text-gray-500">Professional Designer</p>
+                {winner && (
+                    <div className="mb-8 shadow-xl rounded-xl p-6 px-8 bg-base-200">
+                        <h2 className="text-2xl font-semibold mb-4">Winner</h2>
+                        <div className='flex justify-between items-center'>
+                            <div className="flex items-center gap-4">
+                                <img src={winner.participant.photoURL} className="w-16 h-16 rounded-full" />
+                                <div>
+                                    <p className="font-semibold">{winner.participant.name}</p>
+                                    <p className="text-sm text-gray-500">Winner</p>
+                                </div>
+                            </div>
+                            <div><GiTrophyCup size={60} /></div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap justify-end gap-4">
@@ -223,10 +238,12 @@ const ContestDetails = () => {
                     {/* Submit  */}
                     {!isEnded && isRegistered && (
                         <button
+                            disabled={hasSubmitted}
                             onClick={() => setShowModal(true)}
-                            className="btn btn-outline btn-lg"
+                            className={`btn btn-outline btn-lg ${hasSubmitted && 'btn-disabled'
+                                }`}
                         >
-                            Submit Task
+                            {hasSubmitted ? 'Submitted ✅' : 'Submit Task'}
                         </button>
                     )}
                 </div>
