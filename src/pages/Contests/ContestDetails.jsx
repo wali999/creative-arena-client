@@ -3,6 +3,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 const ContestDetails = () => {
     const { id } = useParams();
@@ -12,6 +13,9 @@ const ContestDetails = () => {
 
     const [timeLeft, setTimeLeft] = useState(null);
     const [isEnded, setIsEnded] = useState(false);
+
+    const [submissionText, setSubmissionText] = useState('');
+    const [submissionLink, setSubmissionLink] = useState('');
 
     const { data: contest, isLoading } = useQuery({
         queryKey: ['contest', id],
@@ -69,6 +73,35 @@ const ContestDetails = () => {
 
         window.location.href = res.data.url;
     };
+
+
+
+
+    const handleSubmitTask = async () => {
+        const submission = {
+            contestId: contest._id,
+            contestName: contest.name,
+            participant: {
+                email: user.email,
+                name: user.displayName,
+                photoURL: user.photoURL
+            },
+            submissionText,
+            submissionLink
+        };
+
+        await axiosSecure.post('/submissions', submission);
+
+        setShowModal(false);
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Submission successful!",
+            showConfirmButton: false,
+            timer: 2500
+        });
+    };
+
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -209,9 +242,19 @@ const ContestDetails = () => {
                         </h3>
 
                         <textarea
-                            className="textarea textarea-bordered w-full mb-4"
+                            className="textarea textarea-bordered w-full mb-3"
                             rows="4"
-                            placeholder="Provide your submission links or details..."
+                            placeholder="Explain your work..."
+                            value={submissionText}
+                            onChange={e => setSubmissionText(e.target.value)}
+                        />
+
+                        <input
+                            type="url"
+                            className="input input-bordered w-full mb-4"
+                            placeholder="Submission link (Figma, GitHub, Drive...)"
+                            value={submissionLink}
+                            onChange={e => setSubmissionLink(e.target.value)}
                         />
 
                         <div className="flex justify-end gap-3">
@@ -221,7 +264,10 @@ const ContestDetails = () => {
                             >
                                 Cancel
                             </button>
-                            <button className="btn btn-sm btn-primary">
+                            <button
+                                onClick={handleSubmitTask}
+                                className="btn btn-sm btn-primary"
+                            >
                                 Submit
                             </button>
                         </div>
