@@ -14,6 +14,8 @@ import MyCreatedContests from "../pages/Dashboard/Creator/MyCreatedContests";
 import EditContest from "../pages/Dashboard/Creator/EditContest";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ManageContests from "../pages/Dashboard/Admin/ManageContests";
+import MyParticipated from "../pages/Dashboard/User/MyParticipated";
+import PaymentSuccess from "../pages/Contests/payment-success";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path: 'all-contests/:id',
                 Component: ContestDetails
+            },
+            {
+                path: 'payment-success',
+                element: <PaymentSuccess></PaymentSuccess>
             }
         ]
     },
@@ -57,6 +63,12 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: DashboardHome
+            },
+
+            // User only route
+            {
+                path: 'my-articipated-contests',
+                Component: MyParticipated
             },
 
             // Creator only route

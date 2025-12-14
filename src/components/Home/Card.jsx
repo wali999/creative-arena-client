@@ -53,7 +53,7 @@ const Card = ({ contest }) => {
                     <p className="flex gap-2 items-center">
                         <FaUserFriends className="text-yellow-500" />
                         <span className="font-semibold">Perticipants:</span> {' '}
-                        {contest.participants || 0}
+                        {contest.participants?.length || 0}
                     </p>
                 </div>
 

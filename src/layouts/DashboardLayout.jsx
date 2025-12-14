@@ -43,6 +43,14 @@ const DashboardLayout = () => {
                         </li>
 
                         {/* our dashboard links */}
+                        {/* User */}
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Participated Contests" to='/dashboard/my-articipated-contests'>
+                                <MdAddToPhotos />
+                                <span className="is-drawer-close:hidden">My Participated Contests</span>
+                            </NavLink>
+                        </li>
+
                         {/* Creator */}
                         <li>
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Contest" to='/dashboard/add-contest'>
