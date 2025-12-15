@@ -62,15 +62,27 @@ const SubmittedTasks = () => {
                                 </td>
 
                                 <td>
-                                    <span className={`badge ${sub.status === 'winner' ? 'badge-success' : 'badge-warning'
-                                        }`}>
+                                    <span
+                                        className={`badge font-semibold ${sub.status === 'winner'
+                                                ? 'badge-success'
+                                                : sub.status === 'rejected'
+                                                    ? 'badge-error'
+                                                    : 'badge-warning'
+                                            }`}
+                                    >
                                         {sub.status}
                                     </span>
                                 </td>
 
                                 <td>
                                     {sub.isWinner ? (
-                                        <span className="text-success font-semibold">Winner 🏆</span>
+                                        <span className="text-success font-semibold">
+                                            Winner 🏆
+                                        </span>
+                                    ) : sub.status === 'rejected' ? (
+                                        <span className="text-error font-semibold">
+                                            Rejected
+                                        </span>
                                     ) : (
                                         <button
                                             className="btn btn-xs btn-primary"

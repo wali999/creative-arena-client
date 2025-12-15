@@ -72,6 +72,7 @@ const ContestDetails = () => {
 
     const isRegistered = contest?.participants?.includes(user?.email);
     const winner = submissions.find(s => s.isWinner);
+    const contestEnded = isEnded || !!winner;
 
 
     const handlePay = async () => {
@@ -215,7 +216,7 @@ const ContestDetails = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap justify-end gap-4">
-                    {isEnded ? (
+                    {contestEnded ? (
                         <button disabled className="btn btn-disabled btn-lg">
                             Contest Ended
                         </button>
@@ -236,12 +237,11 @@ const ContestDetails = () => {
                     )}
 
                     {/* Submit  */}
-                    {!isEnded && isRegistered && (
+                    {!contestEnded && isRegistered && (
                         <button
                             disabled={hasSubmitted}
                             onClick={() => setShowModal(true)}
-                            className={`btn btn-outline btn-lg ${hasSubmitted && 'btn-disabled'
-                                }`}
+                            className={`btn btn-outline btn-lg ${hasSubmitted && 'btn-disabled'}`}
                         >
                             {hasSubmitted ? 'Submitted ✅' : 'Submit Task'}
                         </button>

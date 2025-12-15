@@ -99,7 +99,7 @@ const MyCreatedContests = () => {
 
                                     {contest.status === 'approved' && (
                                         <Link
-                                            to={`/dashboard/submissions/${contest._id}`}
+                                            to={`/dashboard/submitted-task`}
                                             className="btn btn-sm btn-info"
                                         >
                                             See Submissions
