@@ -18,6 +18,7 @@ import MyParticipated from "../pages/Dashboard/User/MyParticipated";
 import PaymentSuccess from "../pages/Contests/payment-success";
 import SubmittedTasks from "../pages/Dashboard/Creator/SubmittedTasks";
 import MyWinningContests from "../pages/Dashboard/User/MyWinningContests";
+import MyProfile from "../pages/Dashboard/User/MyProfile";
 
 export const router = createBrowserRouter([
     {
@@ -69,7 +70,11 @@ export const router = createBrowserRouter([
 
             // User only route
             {
-                path: 'my-articipated-contests',
+                path: 'my-profile',
+                Component: MyProfile
+            },
+            {
+                path: 'my-participated-contests',
                 Component: MyParticipated
             },
             {
