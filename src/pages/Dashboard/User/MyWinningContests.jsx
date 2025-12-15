@@ -19,11 +19,8 @@ const MyWinningContests = () => {
     }
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-bold mb-6"> My Winning Contests</h2>
+            <h2 className="text-2xl text-center font-bold mb-6"> My Winning Contests</h2>
 
-            {wins.length === 0 && (
-                <p className="text-gray-500">You haven’t won any contests yet.</p>
-            )}
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {wins.map(win => (
@@ -79,6 +76,10 @@ const MyWinningContests = () => {
                     </div>
                 ))}
             </div>
+
+            {wins.length === 0 && (
+                <p className="text-gray-500 text-center">You haven't won any contests yet.</p>
+            )}
         </div>
     );
 };

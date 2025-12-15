@@ -30,7 +30,7 @@ const SubmittedTasks = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-bold mb-6">Submitted Task on My Created Contests</h2>
+            <h2 className="text-2xl text-center font-bold mb-6">Submitted Task on My Created Contests</h2>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
@@ -64,10 +64,10 @@ const SubmittedTasks = () => {
                                 <td>
                                     <span
                                         className={`badge font-semibold ${sub.status === 'winner'
-                                                ? 'badge-success'
-                                                : sub.status === 'rejected'
-                                                    ? 'badge-error'
-                                                    : 'badge-warning'
+                                            ? 'badge-success'
+                                            : sub.status === 'rejected'
+                                                ? 'badge-error'
+                                                : 'badge-warning'
                                             }`}
                                     >
                                         {sub.status}
@@ -99,7 +99,7 @@ const SubmittedTasks = () => {
 
                 {submissions.length === 0 && (
                     <p className="text-center mt-6 text-gray-500">
-                        You haven't created any contests yet.
+                        No Submission's in your created contests yet.
                     </p>
                 )}
             </div>

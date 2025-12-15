@@ -6,8 +6,10 @@ import { MdAddToPhotos, MdAppRegistration, MdBookmarkAdded, MdLibraryAddCheck } 
 import { FaUserEdit, FaUserTie } from 'react-icons/fa';
 import { BsFillSendCheckFill } from 'react-icons/bs';
 import { GiTrophy } from 'react-icons/gi';
+import useRole from '../hooks/useRole';
 
 const DashboardLayout = () => {
+    const { role } = useRole();
     return (
         <div className="drawer lg:drawer-open max-w-7xl mx-auto">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -66,40 +68,49 @@ const DashboardLayout = () => {
                         </li>
 
                         {/* Creator */}
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Contest" to='/dashboard/add-contest'>
-                                <MdAddToPhotos />
-                                <span className="is-drawer-close:hidden">Add Contest</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === 'creator' && <>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Contest" to='/dashboard/add-contest'>
+                                        <MdAddToPhotos />
+                                        <span className="is-drawer-close:hidden">Add Contest</span>
+                                    </NavLink>
+                                </li>
 
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Created Contest" to='/dashboard/my-created-contests'>
-                                <MdBookmarkAdded />
-                                <span className="is-drawer-close:hidden">My Created Contest</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Submitted Task" to='/dashboard/submitted-task'>
-                                <BsFillSendCheckFill />
-                                <span className="is-drawer-close:hidden">Submitted Task</span>
-                            </NavLink>
-                        </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Created Contest" to='/dashboard/my-created-contests'>
+                                        <MdBookmarkAdded />
+                                        <span className="is-drawer-close:hidden">My Created Contest</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Submitted Task" to='/dashboard/submitted-task'>
+                                        <BsFillSendCheckFill />
+                                        <span className="is-drawer-close:hidden">Submitted Task</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+
 
 
                         {/* Admin Dashboard panel */}
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users" to='/dashboard/manage-users'>
-                                <FaUserEdit />
-                                <span className="is-drawer-close:hidden">Manage Users</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Contests" to='/dashboard/manage-contests'>
-                                <MdAppRegistration />
-                                <span className="is-drawer-close:hidden">Manage Contests</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === 'admin' && <>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users" to='/dashboard/manage-users'>
+                                        <FaUserEdit />
+                                        <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Contests" to='/dashboard/manage-contests'>
+                                        <MdAppRegistration />
+                                        <span className="is-drawer-close:hidden">Manage Contests</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
 
                     </ul>
                 </div>

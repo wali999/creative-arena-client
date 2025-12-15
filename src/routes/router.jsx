@@ -20,6 +20,8 @@ import SubmittedTasks from "../pages/Dashboard/Creator/SubmittedTasks";
 import MyWinningContests from "../pages/Dashboard/User/MyWinningContests";
 import MyProfile from "../pages/Dashboard/User/MyProfile";
 import Leaderboard from "../pages/Extra/Leaderboard";
+import AdminRoute from "./AdminRoute";
+import CreatorRoute from "./CreatorRoute";
 
 export const router = createBrowserRouter([
     {
@@ -36,11 +38,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'all-contests/:id',
-                Component: ContestDetails
+                element: <PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>
             },
             {
                 path: 'payment-success',
-                element: <PaymentSuccess></PaymentSuccess>
+                element: <PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
             },
             {
                 path: 'leaderboard',
@@ -90,29 +92,29 @@ export const router = createBrowserRouter([
             // Creator only route
             {
                 path: 'add-contest',
-                Component: AddContest
+                element: <CreatorRoute><AddContest></AddContest></CreatorRoute>
             },
             {
                 path: 'my-created-contests',
-                Component: MyCreatedContests
+                element: <CreatorRoute><MyCreatedContests></MyCreatedContests></CreatorRoute>
             },
             {
                 path: 'edit-contest/:id',
-                Component: EditContest
+                element: <CreatorRoute><EditContest></EditContest></CreatorRoute>
             },
             {
                 path: 'submitted-task',
-                Component: SubmittedTasks
+                element: <CreatorRoute><SubmittedTasks></SubmittedTasks></CreatorRoute>
             },
 
             // Admin only route
             {
                 path: 'manage-users',
-                Component: ManageUsers
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: 'manage-contests',
-                Component: ManageContests
+                element: <AdminRoute><ManageContests></ManageContests></AdminRoute>
             }
         ]
     }
