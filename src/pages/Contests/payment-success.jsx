@@ -15,10 +15,10 @@ const PaymentSuccess = () => {
     }, [axiosSecure, params]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-[70vh] flex items-center justify-center">
             <div className="bg-base-100 shadow-xl rounded-xl p-10 text-center">
                 <h2 className="text-3xl font-bold text-success mb-4">
-                    Payment Successful 🎉
+                    Payment Successful ✅
                 </h2>
                 <p className="text-gray-600">
                     You are successfully registered for the contest.
