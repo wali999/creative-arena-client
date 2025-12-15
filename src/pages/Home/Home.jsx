@@ -1,9 +1,10 @@
 import React from 'react';
+import PopularContests from './PopularContests';
 
 const Home = () => {
     return (
         <div>
-            Home
+            <PopularContests></PopularContests>
         </div>
     );
 };
