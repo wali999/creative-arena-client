@@ -21,11 +21,11 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to=''>Home</NavLink></li>
         <li><NavLink to='/all-contests'>All Contests</NavLink></li>
-        <li><NavLink to='/extra'>Xtra</NavLink></li>
+        <li><NavLink to='/leaderboard'>Leaderboard</NavLink></li>
         <li><NavLink to=''>About Us</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100 shadow-sm relative z-50">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -73,7 +73,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 {isOpen && (
-                    <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[7vw] bg-white overflow-hidden right-0 top-12 text-sm'>
+                    <div className='absolute right-0 top-12 z-9999 rounded-xl shadow-md w-[40vw] md:w-[7vw] bg-white overflow-hidden text-sm'>
                         <div className='flex flex-col cursor-pointer'>
                             {user ? (
                                 <>

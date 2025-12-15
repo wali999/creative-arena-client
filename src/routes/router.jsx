@@ -19,6 +19,7 @@ import PaymentSuccess from "../pages/Contests/payment-success";
 import SubmittedTasks from "../pages/Dashboard/Creator/SubmittedTasks";
 import MyWinningContests from "../pages/Dashboard/User/MyWinningContests";
 import MyProfile from "../pages/Dashboard/User/MyProfile";
+import Leaderboard from "../pages/Extra/Leaderboard";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-success',
                 element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: 'leaderboard',
+                Component: Leaderboard
             }
         ]
     },
