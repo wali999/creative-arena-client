@@ -5,6 +5,7 @@ import SocialLogin from './SocialLogin';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
@@ -43,6 +44,14 @@ const Register = () => {
                                     console.log('user created in the database');
                                 }
                             })
+                            .catch(err => {
+                                console.error(err);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Database Error',
+                                    text: 'Failed to save user in database.'
+                                });
+                            });
 
                         //update user profile to firebase  
                         const userProfile = {
@@ -51,19 +60,35 @@ const Register = () => {
                         }
                         updateUserProfile(userProfile)
                             .then(() => {
-                                console.log('user profile updated');
+                                // console.log('user profile updated');
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: `Welcome, ${data.name}!`,
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                });
                                 navigate(location.state || '/')
 
                             })
-                            .catch(error => console.log(error)
-                            )
-
+                            .catch(error => {
+                                console.error(error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Profile Update Failed',
+                                    text: error.message
+                                });
+                            });
                     })
 
             })
             .catch(error => {
-                console.log(error)
-            })
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message
+                });
+            });
     }
 
 

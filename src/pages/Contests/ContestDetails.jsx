@@ -227,14 +227,14 @@ const ContestDetails = () => {
                         >
                             Registered ✅
                         </button>
-                    ) : (
+                    ) : (user.role === 'user') ? (
                         <button
                             onClick={handlePay}
                             className="btn btn-primary btn-lg"
                         >
                             Pay ${contest.price} to Register
                         </button>
-                    )}
+                    ) : null}
 
                     {/* Submit  */}
                     {!contestEnded && isRegistered && (

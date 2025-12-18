@@ -16,14 +16,14 @@ const WinnerAdvertisement = () => {
     const totalWinners = data?.totalWinners || 0;
 
     return (
-        <section className="py-16 bg-linear-to-r from-indigo-50 to-pink-50">
+        <section className="py-16 bg-base-200 transition-colors">
             <div className="max-w-7xl mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold mb-3">
+                    <h2 className="text-4xl font-bold mb-3 text-base-content">
                         Our Winners Are Winning Big!
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-base-content/70 max-w-2xl mx-auto">
                         🚀 You Could Be Next!
                         Join contests, showcase your skills, and become our next winner!
                     </p>
@@ -40,7 +40,7 @@ const WinnerAdvertisement = () => {
                     {winners.map(winner => (
                         <div
                             key={winner._id}
-                            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition"
+                            className="bg-base-100 rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-[1.02]"
                         >
 
                             <img
@@ -58,7 +58,7 @@ const WinnerAdvertisement = () => {
                                         <p className="font-semibold">
                                             {winner.participant.name}
                                         </p>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-base-content/60">
                                             Winner 🏆
                                         </p>
                                     </div>
@@ -68,7 +68,7 @@ const WinnerAdvertisement = () => {
                                     {winner.contestName}
                                 </h4>
 
-                                <p className="text-sm text-gray-600 mb-3">
+                                <p className="text-sm text-base-content/60 mb-3">
                                     Prize Money
                                 </p>
 

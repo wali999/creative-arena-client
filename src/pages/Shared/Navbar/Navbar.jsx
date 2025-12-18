@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router';
-import logoImg from '../../../assets/Creative-Arena-logo.png'
 import avatarImg from '../../../assets/avatar.jpg'
 import useAuth from '../../../hooks/useAuth';
+import useTheme from '../../../hooks/useTheme';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import Logo from '../../../components/Shared/Logo';
 
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
     const [isOpen, setIsOpen] = useState(false)
+    const { theme, toggleTheme } = useTheme();
 
     const handleLogout = () => {
         logOut()
@@ -22,7 +25,7 @@ const Navbar = () => {
         <li><NavLink to=''>Home</NavLink></li>
         <li><NavLink to='/all-contests'>All Contests</NavLink></li>
         <li><NavLink to='/leaderboard'>Leaderboard</NavLink></li>
-        <li><NavLink to=''>About Us</NavLink></li>
+        <li><NavLink to='/about-us'>About Us</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm relative z-50">
@@ -33,14 +36,14 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 text-base-content rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>
                 <div>
                     <Link to='/'>
                         <div className='flex justify-center items-center'>
-                            <img src={logoImg} className="inline-block fill-current w-[50px] h-[50px]" alt="" />
+                            <Logo className="w-10" />
                             <h3 className='text-3xl font-bold ml-2'>creativeArena</h3>
                         </div>
                     </Link>
@@ -53,6 +56,17 @@ const Navbar = () => {
             </div>
             <div className="navbar-end relative">
                 <div className='flex flex-row items-center gap-3'>
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        className="btn btn-ghost btn-circle"
+                        title="Toggle Theme"
+                    >
+                        {theme === 'light'
+                            ? <FaMoon className="text-lg" />
+                            : <FaSun className="text-lg" />}
+                    </button>
+
                     {/* Dropdown btn */}
                     <div
                         onClick={() => setIsOpen(!isOpen)}
@@ -73,7 +87,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 {isOpen && (
-                    <div className='absolute right-0 top-12 z-9999 rounded-xl shadow-md w-[40vw] md:w-[7vw] bg-white overflow-hidden text-sm'>
+                    <div className='absolute right-0 top-12 z-50 rounded-xl shadow-md w-[40vw] md:w-[7vw] bg-base-100 text-base-content overflow-hidden text-sm'>
                         <div className='flex flex-col cursor-pointer'>
                             {user ? (
                                 <>
@@ -82,13 +96,13 @@ const Navbar = () => {
                                     </div>
                                     <Link
                                         to='/dashboard'
-                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                        className='px-4 py-2 hover:bg-base-200 transition font-semibold'
                                     >
                                         Dashboard
                                     </Link>
                                     <div
                                         onClick={handleLogout}
-                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                        className='px-4 py-2 hover:bg-base-200 transition font-semibold cursor-pointer'
                                     >
                                         Logout
                                     </div>
@@ -97,13 +111,13 @@ const Navbar = () => {
                                 <>
                                     <Link
                                         to='/login'
-                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                        className='px-4 py-2 hover:bg-base-200 transition font-semibold'
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         to='/register'
-                                        className='px-4 py-2 hover:bg-neutral-100 transition font-semibold'
+                                        className='px-4 py-2 hover:bg-base-200 transition font-semibold'
                                     >
                                         Register
                                     </Link>

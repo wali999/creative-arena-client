@@ -22,6 +22,8 @@ import MyProfile from "../pages/Dashboard/User/MyProfile";
 import Leaderboard from "../pages/Extra/Leaderboard";
 import AdminRoute from "./AdminRoute";
 import CreatorRoute from "./CreatorRoute";
+import AboutUs from "../pages/Extra/AboutUs";
+import Error404 from "../pages/Extra/Error404";
 
 export const router = createBrowserRouter([
     {
@@ -47,7 +49,12 @@ export const router = createBrowserRouter([
             {
                 path: 'leaderboard',
                 Component: Leaderboard
-            }
+            },
+            {
+                path: 'about-us',
+                Component: AboutUs
+            },
+
         ]
     },
     {
@@ -117,5 +124,9 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><ManageContests></ManageContests></AdminRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        Component: Error404
     }
 ]);

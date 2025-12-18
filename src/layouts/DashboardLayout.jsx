@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
-import logoImg from '../assets/Creative-Arena-logo.png'
 import { MdAddToPhotos, MdAppRegistration, MdBookmarkAdded, MdLibraryAddCheck } from 'react-icons/md';
 import { FaUserEdit, FaUserTie } from 'react-icons/fa';
 import { BsFillSendCheckFill } from 'react-icons/bs';
 import { GiTrophy } from 'react-icons/gi';
 import useRole from '../hooks/useRole';
+import Logo from '../components/Shared/Logo';
 
 const DashboardLayout = () => {
     const { role } = useRole();
@@ -34,7 +34,7 @@ const DashboardLayout = () => {
                         {/* List item */}
                         <li>
                             <Link className="mb-5 mt-2.5 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Creative Arena" to='/'>
-                                <img src={logoImg} className='w-5 h-5 ' alt="" />
+                                <Logo className="w-10" />
                                 <span className="text-2xl font-bold is-drawer-close:hidden">Creative Arena</span>
                             </Link>
                         </li>
@@ -46,26 +46,30 @@ const DashboardLayout = () => {
                             </Link>
                         </li>
 
-                        {/* our dashboard links */}
+                        {/*dashboard links */}
                         {/* User */}
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile" to='/dashboard/my-profile'>
-                                <FaUserTie />
-                                <span className="is-drawer-close:hidden">My Profile</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Participated Contests" to='/dashboard/my-participated-contests'>
-                                <MdLibraryAddCheck />
-                                <span className="is-drawer-close:hidden">My Participated Contests</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Winning Contests" to='/dashboard/my-winning-contests'>
-                                <GiTrophy />
-                                <span className="is-drawer-close:hidden">My Winning Contests</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === 'user' && <>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile" to='/dashboard/my-profile'>
+                                        <FaUserTie />
+                                        <span className="is-drawer-close:hidden">My Profile</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Participated Contests" to='/dashboard/my-participated-contests'>
+                                        <MdLibraryAddCheck />
+                                        <span className="is-drawer-close:hidden">My Participated Contests</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Winning Contests" to='/dashboard/my-winning-contests'>
+                                        <GiTrophy />
+                                        <span className="is-drawer-close:hidden">My Winning Contests</span>
+                                    </NavLink>
+                                </li>
+                            </>}
+
 
                         {/* Creator */}
                         {

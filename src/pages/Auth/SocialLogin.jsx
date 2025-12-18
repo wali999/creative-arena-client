@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import { FaGoogle } from 'react-icons/fa';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useLocation, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const SocialLogin = () => {
 
@@ -15,23 +16,33 @@ const SocialLogin = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                const user = result.user;
 
                 //create user in the database
                 const userInfo = {
-                    email: result.user.email,
-                    displayName: result.user.displayName,
-                    photoURL: result.user.photoURL
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
                 }
 
                 axiosSecure.post('/users', userInfo)
-                    .then(res => {
-                        console.log('user data has been stored', res.data)
+                    .then(() => {
                         navigate(location.state || '/')
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `Welcome back, ${user.displayName || 'User'}`,
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
                     })
             })
             .catch(error => {
-                console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login failed',
+                    text: error.message
+                });
             })
     }
 

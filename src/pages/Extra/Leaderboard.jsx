@@ -13,7 +13,7 @@ const Leaderboard = () => {
     });
 
     return (
-        <div className="p-6 max-w-6xl mx-auto">
+        <div className="min-h-[69vh] p-6 max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-6 text-center"> Leaderboard</h2>
 
             <div className="overflow-x-auto">
