@@ -3,7 +3,7 @@
 **Creative Arena** is a full-stack contest management platform where creativity meets opportunity.  
 Users can participate in creative contests, creators can host competitions, and admins manage the entire ecosystem — all through a secure, role-based system.
 
-🔗 **Live Demo:**   
+🔗 **Live Demo:** https://creative-arena-2294f.web.app/  
 📦 **Server Repo:** https://github.com/wali999/creative-arena-server  
 📦 **Client Repo:** https://github.com/wali999/creative-arena-client 
 

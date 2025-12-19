@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import bannerImg from '../../assets/Banner.jpg';
 
 const Banner = () => {
     const [searchType, setSearchType] = useState('');
@@ -33,9 +34,10 @@ const Banner = () => {
     return (
         <div className="relative w-full h-[500px] overflow-hidden flex items-center justify-center">
             <img
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80"
+                // src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80"
+                src={bannerImg}
                 alt="Creative Banner"
-                className="absolute inset-0 w-full h-full object-cover opacity-60"
+                className="absolute inset-0 w-full h-full object-cover object-[50%_20%] opacity-60"
             />
 
             <div className="relative z-10 text-center text-black px-4 w-full">

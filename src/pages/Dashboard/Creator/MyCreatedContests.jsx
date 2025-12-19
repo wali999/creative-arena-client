@@ -27,7 +27,7 @@ const MyCreatedContests = () => {
             confirmButtonText: "Yes, delete",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.delete(`/contests/${id}`);
+                const res = await axiosSecure.delete(`/creator/contests/${id}`);
                 if (res.data.deletedCount > 0) {
                     Swal.fire("Deleted!", "Contest has been removed.", "success");
                     refetch();

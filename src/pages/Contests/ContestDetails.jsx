@@ -5,11 +5,14 @@ import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { GiTrophyCup } from 'react-icons/gi';
+import useRole from '../../hooks/useRole';
+import Loading from '../../components/Shared/Loading';
 
 const ContestDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const { role, roleLoading } = useRole();
     const [showModal, setShowModal] = useState(false);
 
     const [timeLeft, setTimeLeft] = useState(null);
@@ -27,7 +30,7 @@ const ContestDetails = () => {
         },
     });
 
-    const { data: submissions = [] } = useQuery({
+    const { data: submissions = [], refetch: refetchSubmissions } = useQuery({
         queryKey: ['submissions', id],
         enabled: !!id,
         queryFn: async () => {
@@ -65,14 +68,19 @@ const ContestDetails = () => {
 
 
 
-    if (isLoading) {
-        return <p className="text-center mt-10">Loading...</p>;
+    if (isLoading || roleLoading) {
+        return <Loading></Loading>;
     }
 
 
     const isRegistered = contest?.participants?.includes(user?.email);
     const winner = submissions.find(s => s.isWinner);
     const contestEnded = isEnded || !!winner;
+    const hasSubmitted = submissions.some(
+        s => s.participant.email === user?.email
+    );
+
+    const isOwner = contest?.createdBy === user?.email;
 
 
     const handlePay = async () => {
@@ -102,6 +110,7 @@ const ContestDetails = () => {
         };
 
         await axiosSecure.post('/submissions', submission);
+        await refetchSubmissions();
 
         setShowModal(false);
         Swal.fire({
@@ -114,9 +123,7 @@ const ContestDetails = () => {
     };
 
 
-    const hasSubmitted = submissions.some(
-        s => s.participant.email === user?.email
-    );
+
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -227,14 +234,22 @@ const ContestDetails = () => {
                         >
                             Registered ✅
                         </button>
-                    ) : (user.role === 'user') ? (
+                    ) : role === 'user' && !isOwner ? (
                         <button
                             onClick={handlePay}
                             className="btn btn-primary btn-lg"
                         >
                             Pay ${contest.price} to Register
                         </button>
-                    ) : null}
+                    ) : isOwner ? (
+                        <p className="text-sm text-gray-500 self-center">
+                            You cannot register for your own contest
+                        </p>
+                    ) : (
+                        <p className="text-sm text-gray-500 self-center">
+                            Only users can register for contests
+                        </p>
+                    )}
 
                     {/* Submit  */}
                     {!contestEnded && isRegistered && (

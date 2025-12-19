@@ -73,7 +73,7 @@ const ManageContests = () => {
             confirmButtonText: "Yes, delete",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.delete(`/contests/${id}`);
+                const res = await axiosSecure.delete(`/admin/contests/${id}`);
                 if (res.data.deletedCount > 0) {
                     Swal.fire("Deleted!", "Contest has been removed.", "success");
                     refetch();
@@ -152,7 +152,7 @@ const ManageContests = () => {
                                 <td className="text-center align-middle">
                                     <button
                                         onClick={() => handleDelete(contest._id)}
-                                        className="text-red-500 inline-flex items-center justify-center"
+                                        className="text-red-500 cursor-pointer inline-flex items-center justify-center"
                                     >
                                         <RiDeleteBin6Fill />
                                     </button>

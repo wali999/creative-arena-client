@@ -111,8 +111,14 @@ const EditContest = () => {
                             >
                                 <option value="">Select a type</option>
                                 <option value="Image Design">Image Design</option>
-                                <option value="Article Writing">Article Writing</option>
-                                <option value="Business Idea">Business Idea</option>
+                                <option value="Video Editing">Video Editing</option>
+                                <option value="Illustration">Illustration</option>
+                                <option value="Music">Music</option>
+                                <option value="Graphic Design">Graphic Design</option>
+                                <option value="3D Modeling">3D Modeling</option>
+                                <option value="Writing">Writing</option>
+                                <option value="Photography">Photography</option>
+                                <option value="UI/UX">UI/UX</option>
                                 <option value="Gaming Review">Gaming Review</option>
                                 <option value="Other">Other</option>
                             </select>
