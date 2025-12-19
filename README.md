@@ -1,16 +1,103 @@
-# React + Vite
+# 🎨 Creative Arena
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Creative Arena** is a full-stack contest management platform where creativity meets opportunity.  
+Users can participate in creative contests, creators can host competitions, and admins manage the entire ecosystem — all through a secure, role-based system.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:**   
+📦 **Server Repo:** https://github.com/wali999/creative-arena-server  
+📦 **Client Repo:** https://github.com/wali999/creative-arena-client 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🏠 Home Page
+- Responsive **Navbar** with logo, website name, and navigation links  
+- User profile avatar with dropdown (Dashboard, Logout) when logged in  
+- **Hero Banner** with contest-type search (backend-powered)  
+- **Popular Contests Section** (Top 6, sorted by highest participation)  
+- Contest cards with image, description preview, participants count, and details button  
+- **Winner Advertisement Section** to motivate users  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🗂️ All Contests Page
+- Displays **admin-approved contests only**
+- Tabs to filter contests by type (Design, Writing etc.)
+
+---
+
+### 🔐 Contest Details Page (Private Route)
+- Full contest information with large banner image
+- Live **deadline countdown** with automatic “Contest Ended” state
+- Participant count increases after successful payment
+- Secure **payment-based registration**
+- Winner name & photo displayed after declaration
+- **Submit Task modal** available only to registered users
+
+---
+
+## 📊 Dashboards
+
+### 👤 User Dashboard
+- My Participated Contests (sorted by upcoming deadline)
+- My Winning Contests
+- Profile update page
+- Win percentage chart (won vs participated)
+
+### ✍️ Creator Dashboard
+- Add Contest 
+- My Created Contests (status: Pending / Approved / Rejected)
+- Edit & delete pending contests
+- View submissions and declare winner
+
+### 🛠️ Admin Dashboard
+- Manage Users (role update)
+- Manage Contests (confirm, reject, delete)
+
+---
+
+## 🏆 Additional Features
+- **Leaderboard** page (ranked by total contest wins)
+- Dark / Light theme toggle
+- Secure APIs using **JWT authentication**
+- Pagination (10 items per page) on Manage Contests page for admin
+- SweetAlert2 for success & error notifications
+- Fully responsive design (mobile, tablet, desktop)
+
+---
+
+## 🧑‍💻 Tech Stack
+
+### Frontend
+- React
+- JavaScript (ES6+)
+- Tailwind CSS
+- DaisyUI
+- React Router
+- React Hook Form
+- React Icons
+- Axios
+- SweetAlert2
+- Firebase Authentication
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT (JSON Web Token)
+- Firebase Admin SDK
+
+### Tools & Services
+- Stripe (Payment Gateway)
+- Imgbb (Image Hosting)
+- Vercel / Netlify (Client Deployment)
+- Render / Railway (Server Deployment)
+
+---
+
+
+👨‍💻 Author
+
+Oali Ullah
+📧 Email: waliullah.neo@gmail.com

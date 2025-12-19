@@ -24,12 +24,12 @@ const AddContest = () => {
             createdBy: user?.email,
         };
 
-        console.log("New Contest:", contestData);
+        // console.log("New Contest:", contestData);
 
         //save the parcel to the database
         axiosSecure.post('/contests', contestData)
             .then(res => {
-                console.log('Aftyer creating contest', res.data);
+                // console.log('Aftyer creating contest', res.data);
                 if (res.data.insertedId) {
                     navigate('/dashboard/my-created-contests')
                     Swal.fire({

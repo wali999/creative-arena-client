@@ -5,6 +5,7 @@ import useAuth from '../../../hooks/useAuth';
 import useTheme from '../../../hooks/useTheme';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import Logo from '../../../components/Shared/Logo';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
 
@@ -14,11 +15,22 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logOut()
-            .then()
-            .catch(error => {
-                console.log(error);
-
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Logged out successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Logout failed',
+                    text: error.message
+                });
+            });
     }
 
     const links = <>

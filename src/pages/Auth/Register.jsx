@@ -20,8 +20,8 @@ const Register = () => {
         const profileImg = data.photo[0];
 
         registerUser(data.email, data.password)
-            .then((result) => {
-                console.log(result.user);
+            .then(() => {
+                // console.log(result.user);
 
                 const formData = new FormData();
                 formData.append('image', profileImg);
@@ -41,11 +41,11 @@ const Register = () => {
                         axiosSecure.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('user created in the database');
+                                    // console.log('user created in the database');
                                 }
                             })
-                            .catch(err => {
-                                console.error(err);
+                            .catch(() => {
+                                // console.error(err);
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Database Error',
@@ -72,7 +72,7 @@ const Register = () => {
 
                             })
                             .catch(error => {
-                                console.error(error);
+                                // console.error(error);
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Profile Update Failed',
